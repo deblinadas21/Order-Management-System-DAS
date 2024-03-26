@@ -20,8 +20,6 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-
-
     @Autowired
     private GoogleMapIntegration googleService;
 
@@ -36,8 +34,8 @@ public class OrderService {
         order.setEnd_latitude(Double.valueOf(orderReq.getDestination()[0]));
         order.setEnd_longitude(Double.valueOf(orderReq.getDestination()[1]));
 
-        // int dist = googleService.findDistance(order.getStart_latitude(), order.getStart_longitude(), order.getEnd_latitude(), order.getEnd_longitude());
-        int dist = 10000;
+        int dist = googleService.findDistance(order.getStart_latitude(), order.getStart_longitude(), order.getEnd_latitude(), order.getEnd_longitude());
+        //int dist = 10000;
         order.setDistance(dist);
         order.setStatus("UNASSIGNED");
         Order res = orderRepository.save(order);

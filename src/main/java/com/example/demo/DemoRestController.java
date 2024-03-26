@@ -23,11 +23,6 @@ public class DemoRestController {
     @Autowired
     OrderService service;
 
-    @GetMapping("/admin")
-    public String test() {
-        return "Hello World";
-    }
-
     GlobalExceptionHandler errorHanlder = new GlobalExceptionHandler();
 
     @PostMapping("/orders")

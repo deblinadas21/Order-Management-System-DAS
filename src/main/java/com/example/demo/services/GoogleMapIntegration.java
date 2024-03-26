@@ -7,6 +7,7 @@ import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixElementStatus;
 import com.google.maps.model.DistanceMatrixRow;
 import com.google.maps.model.LatLng;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,15 +15,12 @@ import java.io.IOException;
 @Service
 public class GoogleMapIntegration {
 
+    @Value("${google.maps.api.key}")
+    private String API_KEY;
     public int findDistance(Double originLat, Double originLng, Double destLat, Double destLng) throws Exception {
-       /* originLat = 37.7749; // Latitude of origin coordinate
-         originLng = -122.4194; // Longitude of origin coordinate
-         destLat = 34.0522; // Latitude of destination coordinate
-         destLng = -118.2437; // Longitude of destination coordinate*/
-
         Long distanceInMeters = 0L;
 
-            GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyBxyT2Xl4AAfET-HxXxZZWmkOFm6yxlQ8U").build();
+            GeoApiContext context = new GeoApiContext.Builder().apiKey(API_KEY).build();
 
             LatLng origin = new LatLng(originLat, originLng);
             LatLng destination = new LatLng(destLat, destLng);
