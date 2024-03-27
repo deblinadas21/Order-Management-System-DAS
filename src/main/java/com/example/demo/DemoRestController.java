@@ -29,8 +29,7 @@ public class DemoRestController {
     public ResponseEntity<?> createOrder(@RequestBody OrderRequest request) {
         try {
             validateOrder(request.getOrigin(),request.getDestination());
-            OrderResponse response = new OrderResponse();
-            response = service.saveOrder(request);
+            OrderResponse response = service.saveOrder(request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(errorHanlder.handleException(e));

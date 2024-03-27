@@ -17,13 +17,13 @@ public class GoogleMapIntegration {
 
     @Value("${google.maps.api.key}")
     private String API_KEY;
-    public int findDistance(Double originLat, Double originLng, Double destLat, Double destLng) throws Exception {
+    public int findDistance(String originLat, String originLng, String destLat, String destLng) throws Exception {
         Long distanceInMeters = 0L;
 
             GeoApiContext context = new GeoApiContext.Builder().apiKey(API_KEY).build();
 
-            LatLng origin = new LatLng(originLat, originLng);
-            LatLng destination = new LatLng(destLat, destLng);
+            LatLng origin = new LatLng(Double.valueOf(originLat), Double.valueOf(originLng));
+            LatLng destination = new LatLng(Double.valueOf(destLat), Double.valueOf(destLng));
 
             DistanceMatrix distanceMatrix = DistanceMatrixApi.newRequest(context)
                     .origins(origin)

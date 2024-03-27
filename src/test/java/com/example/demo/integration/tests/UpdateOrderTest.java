@@ -1,12 +1,11 @@
-package com.example.demo;
+package com.example.demo.integration.tests;
 
+import com.example.demo.DemoRestController;
 import com.example.demo.entities.Order;
-import com.example.demo.model.OrderResponse;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.services.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Answers;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,12 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(DemoRestController.class)
 @AutoConfigureMockMvc

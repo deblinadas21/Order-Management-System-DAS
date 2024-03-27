@@ -28,14 +28,14 @@ public class OrderService {
 
         Order order = new Order();
 
-        order.setStart_latitude(Double.valueOf(orderReq.getOrigin()[0]));
-        order.setStart_longitude(Double.valueOf(orderReq.getOrigin()[1]));
+        order.setStart_latitude(orderReq.getOrigin()[0]);
+        order.setStart_longitude(orderReq.getOrigin()[1]);
 
-        order.setEnd_latitude(Double.valueOf(orderReq.getDestination()[0]));
-        order.setEnd_longitude(Double.valueOf(orderReq.getDestination()[1]));
+        order.setEnd_latitude(orderReq.getDestination()[0]);
+        order.setEnd_longitude(orderReq.getDestination()[1]);
 
         int dist = googleService.findDistance(order.getStart_latitude(), order.getStart_longitude(), order.getEnd_latitude(), order.getEnd_longitude());
-        //int dist = 10000;
+        // int dist = 10000;
         order.setDistance(dist);
         order.setStatus("UNASSIGNED");
         Order res = orderRepository.save(order);
@@ -70,14 +70,14 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderStatus updateOrderStatus(Long id, OrderStatus status) throws Exception{
+    public OrderStatus updateOrderStatus(Long id, OrderStatus status) throws Exception {
         Order order = orderRepository.findById(id).get();
-        if (order!= null && status.getStatus().equals("TAKEN")) {
+        if (order != null && status.getStatus().equals("TAKEN")) {
             order.setStatus("SUCCESS");
             status.setStatus("SUCCESS");
             orderRepository.save(order);
-        }else{
-            throw new Exception("Invalid input:"+status.getStatus());
+        } else {
+            throw new Exception("Invalid input:" + status.getStatus());
         }
         return status;
     }
