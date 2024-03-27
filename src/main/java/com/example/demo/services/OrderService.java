@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.constants.BusinessConstants;
 import com.example.demo.entities.Order;
 import com.example.demo.model.OrderRequest;
 import com.example.demo.model.OrderResponse;
@@ -27,17 +28,15 @@ public class OrderService {
     public OrderResponse saveOrder(OrderRequest orderReq) throws Exception {
 
         Order order = new Order();
-
         order.setStart_latitude(orderReq.getOrigin()[0]);
         order.setStart_longitude(orderReq.getOrigin()[1]);
-
         order.setEnd_latitude(orderReq.getDestination()[0]);
         order.setEnd_longitude(orderReq.getDestination()[1]);
 
         int dist = googleService.findDistance(order.getStart_latitude(), order.getStart_longitude(), order.getEnd_latitude(), order.getEnd_longitude());
         // int dist = 10000;
         order.setDistance(dist);
-        order.setStatus("UNASSIGNED");
+        order.setStatus(BusinessConstants.STATUS_UNASSIGNED);
         Order res = orderRepository.save(order);
 
         OrderResponse response = new OrderResponse();
@@ -72,9 +71,9 @@ public class OrderService {
     @Transactional
     public OrderStatus updateOrderStatus(Long id, OrderStatus status) throws Exception {
         Order order = orderRepository.findById(id).get();
-        if (order != null && status.getStatus().equals("TAKEN")) {
-            order.setStatus("SUCCESS");
-            status.setStatus("SUCCESS");
+        if (order != null && status.getStatus().equals(BusinessConstants.STATUS_TAKEN)) {
+            order.setStatus(BusinessConstants.STATUS_SUCCESS);
+            status.setStatus(BusinessConstants.STATUS_SUCCESS);
             orderRepository.save(order);
         } else {
             throw new Exception("Invalid input:" + status.getStatus());

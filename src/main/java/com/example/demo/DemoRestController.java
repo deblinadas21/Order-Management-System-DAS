@@ -23,7 +23,7 @@ public class DemoRestController {
     @Autowired
     OrderService service;
 
-    GlobalExceptionHandler errorHanlder = new GlobalExceptionHandler();
+    GlobalExceptionHandler errorHandler = new GlobalExceptionHandler();
 
     @PostMapping("/orders")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequest request) {
@@ -32,7 +32,7 @@ public class DemoRestController {
             OrderResponse response = service.saveOrder(request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(errorHanlder.handleException(e));
+            return ResponseEntity.internalServerError().body(errorHandler.handleException(e));
         }
     }
 
@@ -49,7 +49,7 @@ public class DemoRestController {
             response = service.updateOrderStatus(id, status);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(errorHanlder.handleException(e));
+            return ResponseEntity.internalServerError().body(errorHandler.handleException(e));
         }
     }
 
@@ -61,7 +61,7 @@ public class DemoRestController {
             return ResponseEntity.ok(resp);
         }
         catch (Exception e) {
-            return ResponseEntity.internalServerError().body(errorHanlder.handleException(e));
+            return ResponseEntity.internalServerError().body(errorHandler.handleException(e));
         }
     }
 
