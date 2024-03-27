@@ -13,7 +13,7 @@ Project Specification
 3. Run "mvn clean install" - all unit and integration tests should pass. 
 4. There's no separate startup.sh, as the postgreSQL database volume will be up as part of compose (will execute init.sql automatically and set up "orders" database) 
 5. Go to terminal as run "docker-compose up --build", once the service is up verify below
-6. Run "docker ps" and verify both applciation and database are up and running.
+6. Run "docker ps" and verify both application and database are up and running.
    
 CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                    NAMES
 b6551731ce87   demo-app:latest   "java -jar /demo-0.0…"   8 minutes ago    Up 8 minutes   0.0.0.0:8080->8080/tcp   demo-app
